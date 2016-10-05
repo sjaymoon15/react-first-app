@@ -18,7 +18,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>{txt} {cat} {text}</h1>
-				<input type='text' onChange={this.update.bind(this)} />
+				<Widget txt={text} update={this.update.bind(this)} />
 			</div>
 		);
 	}
@@ -32,5 +32,11 @@ App.defaultProps = {
 	txt: 'this is the default props',
 	cat: 10
 }
-
+const Widget = (props) => {
+	return (
+		<div>
+			<input type='text' onChange={props.update} />
+		</div>
+		)
+}
 export default App
