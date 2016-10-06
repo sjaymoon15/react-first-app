@@ -1,24 +1,31 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
 	constructor(){
 		super();
 		this.state= {
-			text:'this is the state text',
-			cat: 0
+			txt:'state default',
+			cat: 0,
+			red: 0,
+			green: 0,
+			blue: 0
 		}
 	}
 	update(e){
-		this.setState({text: e.target.value})
+		this.setState({
+			red: ReactDOM.findDOMNode(this.refs.red).value,
+			green: ReactDOM.findDOMNode(this.refs.green).value,
+			blue: ReactDOM.findDOMNode(this.refs.blue).value,
+		})
 	}
 	render(){
-		let txt = this.props.txt;
-		let cat = this.props.cat;
-		let text = this.state.text;
+		
 		return (
 			<div>
-				<h1>{txt} {cat} {text}</h1>
-				<Widget txt={text} update={this.update.bind(this)} />
+				<Slider ref='red' update={this.update.bind(this)} />{this.state.red}<hr />
+				<Slider ref='green' update={this.update.bind(this)} />{this.state.green}<hr />
+				<Slider ref='blue' update={this.update.bind(this)} />{this.state.blue}<hr />				
 			</div>
 		);
 	}
@@ -32,11 +39,19 @@ App.defaultProps = {
 	txt: 'this is the default props',
 	cat: 10
 }
-const Widget = (props) => {
-	return (
-		<div>
-			<input type='text' onChange={props.update} />
-		</div>
-		)
+class Slider extends React.Component {
+	render(){
+		return (
+			<input type='text' onChange={this.props.update} />
+			)
+	}
 }
+// const Widget = (props) => {
+// 	return (
+// 		<div>
+// 			<h2>{props.txt}</h2>
+// 			<input type='text' onChange={props.update} />
+// 		</div>
+// 		)
+// }
 export default App
