@@ -14,9 +14,9 @@ class App extends React.Component {
 	}
 	update(e){
 		this.setState({
-			red: ReactDOM.findDOMNode(this.refs.red).value,
-			green: ReactDOM.findDOMNode(this.refs.green).value,
-			blue: ReactDOM.findDOMNode(this.refs.blue).value,
+			red: ReactDOM.findDOMNode(this.refs.red.refs.inp).value,
+			green: ReactDOM.findDOMNode(this.refs.green.refs.inp).value,
+			blue: ReactDOM.findDOMNode(this.refs.blue.refs.inp).value,
 		})
 	}
 	render(){
@@ -42,7 +42,9 @@ App.defaultProps = {
 class Slider extends React.Component {
 	render(){
 		return (
-			<input type='text' onChange={this.props.update} />
+			<div>
+				<input ref='inp' type='text' onChange={this.props.update} />
+			</div>
 			)
 	}
 }
